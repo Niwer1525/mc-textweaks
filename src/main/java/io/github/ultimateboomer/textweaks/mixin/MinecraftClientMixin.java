@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.concurrent.CompletableFuture;
 
-@Mixin(MinecraftClient.class)
+@Mixin(value = MinecraftClient.class, priority = 900)
 public abstract class MinecraftClientMixin {
     @Shadow public abstract CompletableFuture<Void> reloadResources();
 

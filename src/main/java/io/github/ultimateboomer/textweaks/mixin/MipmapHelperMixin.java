@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(MipmapHelper.class)
+@Mixin(value = MipmapHelper.class, priority = 900)
 public class MipmapHelperMixin {
     @Inject(method = "getMipmapLevelsImages", at = @At("HEAD"), cancellable = true)
     private static void onGetMipmapLevelsImages(NativeImage image, int mipmap,

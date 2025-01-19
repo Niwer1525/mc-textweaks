@@ -1,6 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id 'maven-publish'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -10,8 +9,8 @@ archivesBaseName = project.mod_name
 version = project.minecraft_version + "-" + project.mod_version
 group = project.maven_group
 
-minecraft {
-	accessWidener "src/main/resources/${project.mod_name}.accesswidener"
+loom {
+	accessWidenerPath = file("src/main/resources/${project.mod_name}.accesswidener")
 }
 
 repositories {
@@ -36,16 +35,13 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	include("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
-	
-//	modImplementation "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
-//	include "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
 
 	modImplementation "com.github.ultimateboomer:mc-niapi:${project.niapi_version}"
 	include "com.github.ultimateboomer:mc-niapi:${project.niapi_version}"
 	
 	modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
-	modRuntime "com.github.ultimateboomer:mc-smoothboot:${project.smoothboot_version}"
+	// modApi "com.github.ultimateboomer:mc-smoothboot:${project.smoothboot_version}" // modRuntime
 }
 
 processResources {
@@ -82,26 +78,5 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
-	}
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
-
-	// Select the repositories you want to publish to
-	// To publish to maven local, no extra repositories are necessary. Just use the task `publishToMavenLocal`.
-	repositories {
-		// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	}
 }

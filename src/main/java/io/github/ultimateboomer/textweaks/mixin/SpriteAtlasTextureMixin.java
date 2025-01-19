@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Mixin(SpriteAtlasTexture.class)
+@Mixin(value = SpriteAtlasTexture.class, priority = 900)
 public abstract class SpriteAtlasTextureMixin extends AbstractTexture {
 	private static final Map<Identifier, Double> SCALE_MAP = new ConcurrentHashMap<>();
 

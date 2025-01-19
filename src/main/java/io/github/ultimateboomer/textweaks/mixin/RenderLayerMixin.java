@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(RenderLayer.class)
+@Mixin(value = RenderLayer.class, priority = 900)
 public abstract class RenderLayerMixin extends RenderPhase {
     public RenderLayerMixin(String name, Runnable beginAction, Runnable endAction) {
         super(name, beginAction, endAction);
